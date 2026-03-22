@@ -3,6 +3,7 @@ const express = require("express");
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const mongoose = require("mongoose");
 const cors = require("cors");
+const crypto = require("crypto");
 
 const app = express();
 app.use(cors({origin:"*"}));
@@ -11,13 +12,26 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>console.log("MongoDB connecte
 
 const UserSchema = new mongoose.Schema({
   email:{type:String,unique:true},
+  password:String,
   plan:{type:String,default:"free"},
   stripeCustomerId:String,
   updatedAt:{type:Date,default:Date.now}
 });
 const User = mongoose.model("OfficeSuiteUser",UserSchema);
 
-app.post("/webhook",express.raw({type:"application/json"}),async(req,res)=>{
+function hashPassword(password){
+  return crypto.createHash("sha256").update(password+process.env.JWT_SECRET).digest("hex");
+}
+
+function generateToken(email){
+  const data = email+":"+Date.now()+":"+process.env.JWT_SECRET;
+  return Buffer.from(data).toString("base64");
+}
+
+app.use("/webhook",express.raw({type:"application/json"}));
+app.use(express.json());
+
+app.post("/webhook",async(req,res)=>{
   const sig = req.headers["stripe-signature"];
   let event;
   try{
@@ -45,7 +59,36 @@ app.post("/webhook",express.raw({type:"application/json"}),async(req,res)=>{
   res.json({received:true});
 });
 
-app.use(express.json());
+app.post("/register",async(req,res)=>{
+  const {email,password} = req.body;
+  if(!email||!password) return res.status(400).json({error:"Email and password required"});
+  try{
+    const existing = await User.findOne({email});
+    if(existing) return res.status(400).json({error:"Email already registered"});
+    const hashed = hashPassword(password);
+    const user = await User.create({email,password:hashed,plan:"free"});
+    const token = generateToken(email);
+    res.json({token,email,plan:"free"});
+  }catch(err){
+    res.status(500).json({error:err.message});
+  }
+});
+
+app.post("/login",async(req,res)=>{
+  const {email,password} = req.body;
+  if(!email||!password) return res.status(400).json({error:"Email and password required"});
+  try{
+    const user = await User.findOne({email});
+    if(!user) return res.status(400).json({error:"Email not found"});
+    if(!user.password) return res.status(400).json({error:"Please register first"});
+    const hashed = hashPassword(password);
+    if(user.password!==hashed) return res.status(400).json({error:"Wrong password"});
+    const token = generateToken(email);
+    res.json({token,email,plan:user.plan||"free"});
+  }catch(err){
+    res.status(500).json({error:err.message});
+  }
+});
 
 app.get("/plan/:email",async(req,res)=>{
   try{
