@@ -177,5 +177,31 @@ app.post("/seed-products", async (req, res) => {
   } catch(e) {res.status(500).json({error:e.message});}
 });
 
+app.post("/seed-large", async (req, res) => {
+  try {
+    const adminKey = req.headers["x-admin-key"];
+    if(adminKey !== process.env.ADMIN_KEY) return res.status(401).json({error:"Unauthorized"});
+    const count = await Product.countDocuments();
+    if(count > 100) return res.json({message:"Already seeded", count});
+    const cats = {electronics:["Laptop","Smartphone","Tablet","Wireless Headphones","Bluetooth Speaker","4K Camera","Smart TV","Gaming Mouse","Mechanical Keyboard","USB Hub","Webcam","Monitor","Drone","Power Bank","Smart Watch","LED Strip","Security Camera","VR Headset","Charging Pad","Earbuds"],fashion:["T-Shirt","Jeans","Summer Dress","Leather Jacket","Sneakers","Ankle Boots","Handbag","Leather Wallet","Sunglasses","Braided Belt","Hoodie","Winter Coat","Cargo Shorts","Mini Skirt","Blazer","Silk Scarf","Baseball Cap","Winter Gloves","Sports Socks","Swimsuit"],home:["Coffee Table","Desk Lamp","Bed Sheets Set","Memory Pillow","Weighted Blanket","Blackout Curtains","Wall Mirror","Ceramic Vase","Wall Clock","Scented Candle Set","Photo Frame","Floating Shelf","Area Rug","Towel Set","Kitchen Scale","Blender","Toaster","Air Fryer","Rice Cooker","Vacuum Cleaner"],sports:["Yoga Mat","Adjustable Dumbbells","Resistance Bands","Jump Rope","Protein Powder","Sports Water Bottle","Running Shoes","Gym Bag","Cycling Helmet","Tennis Racket","Football","Basketball","Swimming Goggles","Foam Roller","Pull Up Bar","Kettlebell","Exercise Bike","Punching Bag","Fitness Tracker","Hiking Boots"],beauty:["Face Cream","Matte Lipstick","Foundation","Mascara","Vitamin C Serum","Toner","Argan Shampoo","Conditioner","Body Lotion","Eau de Parfum","Nail Polish Set","Eye Shadow Palette","Blush","Highlighter","Concealer","Sheet Face Mask","Hair Oil","Beard Grooming Kit","SPF Sunscreen","Body Scrub"],kids:["LEGO Set","Stuffed Bear","Jigsaw Puzzle","Board Game","Coloring Book","Toy Car Set","Fashion Doll","Action Figure","Building Blocks","Kids Bike","Kick Scooter","School Backpack","Lunch Box","Kids Water Bottle","Art Supply Set","Science Experiment Kit","Remote Control Car","Playdough Set","Swing Set","Kids Telescope"],garden:["Ceramic Plant Pot","Garden Hose","Stainless Shovel","Garden Rake","Watering Can","Plant Fertilizer","Flower Seeds Pack","Pruning Shears","Garden Gloves","Electric Lawnmower","BBQ Grill","Patio Chair","Garden Table","Outdoor Umbrella","Bird Feeder","Compost Bin","Wheelbarrow","Solar Garden Light","Insect Repellent","Lawn Sprinkler"],pets:["Premium Dog Food","Premium Cat Food","Orthopedic Pet Bed","Retractable Leash","Leather Collar","Interactive Pet Toy","Cat Scratching Post","Fish Aquarium","Bird Cage","Pet Shampoo","Flea Treatment","Pet Carrier Bag","Stainless Food Bowl","Pet Water Fountain","Pet Camera","Self-Cleaning Litter Box","Hamster Wheel","Tropical Fish Food","Reptile Heat Lamp","Pet First Aid Kit"],office:["Ergonomic Chair","Height Adjustable Desk","Hardcover Notebook","Luxury Pen Set","Heavy Duty Stapler","File Organizer","Desk Calendar","Dry Erase Whiteboard","Mini Projector","Paper Shredder","Scientific Calculator","Label Maker","Ring Binder","Paper Tray","Large Desk Mat","Dual Monitor Stand","Aluminum Laptop Stand","Cable Management Box","Sticky Notes Pack","Pastel Highlighter Set"],food:["Extra Virgin Olive Oil","Specialty Coffee Beans","Organic Green Tea","Protein Bar Box","Raw Honey","Dark Chocolate Box","Mixed Nuts Pack","Dried Fruit Mix","Artisan Pasta","Basmati Rice","Organic Quinoa","Granola","Smoothie Mix","Energy Drink Pack","Multivitamins","Omega-3 Capsules","Probiotic Capsules","Collagen Powder","Oat Milk","Organic Coconut Oil"]};
+    const imgs = ["https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80","https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80","https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=600&q=80","https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&q=80","https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80","https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80","https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80","https://images.unsplash.com/photo-1601925228897-b7ed5e97c26b?w=600&q=80","https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&q=80","https://images.unsplash.com/photo-1585790050230-5dd28404ccb9?w=600&q=80","https://images.unsplash.com/photo-1610890716171-6b1bb98ffd09?w=600&q=80","https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80","https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=600&q=80","https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80","https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&q=80"];
+    const badges = ["","","","SALE","HOT","NEW","","SALE","","NEW"];
+    const adjs = ["Premium","Pro","Ultra","Deluxe","Smart","Elite","Classic","Essential","Advanced","Professional"];
+    const products = [];
+    await Product.deleteMany({});
+    for(const [cat, items] of Object.entries(cats)){
+      items.forEach((name,i)=>{
+        adjs.forEach((adj,j)=>{
+          const base = Math.floor(Math.random()*180)+10;
+          const old = Math.floor(base*(1.2+Math.random()*0.3));
+          products.push({name:`${adj} ${name}`,description:`High quality ${name.toLowerCase()}. Durable, reliable and stylish.`,price:parseFloat(base.toFixed(2)),oldPrice:parseFloat(old.toFixed(2)),category:cat,image:imgs[(i+j)%imgs.length],badge:badges[Math.floor(Math.random()*badges.length)],stock:Math.floor(Math.random()*100)+5,active:true});
+        });
+      });
+    }
+    await Product.insertMany(products);
+    res.json({success:true, message:"Large seed done", count:products.length});
+  } catch(e){res.status(500).json({error:e.message});}
+});
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log("NNIT Backend v2 running on port", PORT));
