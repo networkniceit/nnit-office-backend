@@ -60,7 +60,7 @@ app.get("/plan/:email", async (req, res) => {
 app.get("/products", async (req, res) => {
   try {
     const {category, search, limit} = req.query;
-    let query = {active:{$ne:false}};
+    let query = {}; 
     if(category && category !== "all") query.category = category;
     if(search) query.name = {$regex:search, $options:"i"};
     const products = await Product.find(query).limit(parseInt(limit)||100).sort({createdAt:-1});
