@@ -63,7 +63,7 @@ app.get("/products", async (req, res) => {
     let query = {}; 
     if(category && category !== "all") query.category = category;
     if(search) query.name = {$regex:search, $options:"i"};
-    const products = await Product.find(query).limit(parseInt(limit)||100).sort({createdAt:-1});
+    const products = await Product.find(query).limit(parseInt(limit)||2000).sort({createdAt:-1});
     res.json(products);
   } catch(e) {res.status(500).json({error:e.message});}
 });
