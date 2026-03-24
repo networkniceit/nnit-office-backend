@@ -87,8 +87,7 @@ app.put("/products/:id", async (req, res) => {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
     res.json(product);
   } catch(e) {res.status(500).json({error:e.message});}
-});
-image:`https://picsum.photos/seed/${encodeURIComponent(adj+name)}/600/400`,
+}); 
 
 app.delete("/products/:id", async (req, res) => {
   try {
@@ -188,7 +187,7 @@ app.post("/seed-large", async (req, res) => {
             price:parseFloat(base.toFixed(2)),
             oldPrice:parseFloat(old.toFixed(2)),
             category:cat,
-            image:imgs[(i+j)%imgs.length],
+            image:"https://picsum.photos/seed/"+encodeURIComponent(name+i+j)+"/600/400",
             badge:badges[Math.floor(Math.random()*badges.length)],
             stock:Math.floor(Math.random()*100)+5,
             active:true
@@ -202,4 +201,4 @@ app.post("/seed-large", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log("NNIT Backend v2 running on port", PORT)); 
+app.listen(PORT, () => console.log("NNIT Backend v2 running on port", PORT));
