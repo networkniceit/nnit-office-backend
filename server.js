@@ -88,6 +88,7 @@ app.put("/products/:id", async (req, res) => {
     res.json(product);
   } catch(e) {res.status(500).json({error:e.message});}
 });
+image:`https://picsum.photos/seed/${encodeURIComponent(adj+name)}/600/400`,
 
 app.delete("/products/:id", async (req, res) => {
   try {
