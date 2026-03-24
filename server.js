@@ -187,7 +187,7 @@ app.post("/seed-large", async (req, res) => {
             price:parseFloat(base.toFixed(2)),
             oldPrice:parseFloat(old.toFixed(2)),
             category:cat,
-            image:imgs[j%imgs.length],
+            image:(imgs && imgs.length ? imgs[j%imgs.length] : "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80"),
             badge:badges[Math.floor(Math.random()*badges.length)],
             stock:Math.floor(Math.random()*100)+5,
             active:true
