@@ -87,7 +87,7 @@ app.put("/products/:id", async (req, res) => {
     const product = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
     res.json(product);
   } catch(e) {res.status(500).json({error:e.message});}
-}); 
+});
 
 app.delete("/products/:id", async (req, res) => {
   try {
@@ -187,7 +187,7 @@ app.post("/seed-large", async (req, res) => {
             price:parseFloat(base.toFixed(2)),
             oldPrice:parseFloat(old.toFixed(2)),
             category:cat,
-            image:"https://picsum.photos/seed/"+encodeURIComponent(name+i+j)+"/600/400",
+            image:imgs[j%imgs.length],
             badge:badges[Math.floor(Math.random()*badges.length)],
             stock:Math.floor(Math.random()*100)+5,
             active:true
