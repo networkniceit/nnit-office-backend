@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
@@ -202,3 +203,4 @@ app.post("/seed-large", async (req, res) => {
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log("NNIT Backend v2 running on port", PORT));
+
