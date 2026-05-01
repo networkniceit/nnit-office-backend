@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -133,36 +133,36 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">HOME</div>
-    <div class="nav-item active" onclick="showPage('home')">🏠 Dashboard</div>
-    <div class="nav-item" onclick="showPage('pricing')">💳 Pricing & Plans</div>
+    <div class="nav-item active" onclick="showPage('home')">?? Dashboard</div>
+    <div class="nav-item" onclick="showPage('pricing')">?? Pricing & Plans</div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">AI TOOLS</div>
-    <div class="nav-item" onclick="showPage('ai-writer')">✍️ AI Writer</div>
-    <div class="nav-item" onclick="showPage('ai-reader')">🔍 AI Reader</div>
-    <div class="nav-item" onclick="showPage('translator')">🌐 Translator</div>
-    <div class="nav-item" onclick="showPage('email')">📧 Email Composer</div>
+    <div class="nav-item" onclick="showPage('ai-writer')">?? AI Writer</div>
+    <div class="nav-item" onclick="showPage('ai-reader')">?? AI Reader</div>
+    <div class="nav-item" onclick="showPage('translator')">?? Translator</div>
+    <div class="nav-item" onclick="showPage('email')">?? Email Composer</div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">PDF TOOLS</div>
-    <div class="nav-item" onclick="showPage('pdf-compress')">🗜️ Compress PDF</div>
-    <div class="nav-item" onclick="showPage('pdf-merge')">🔗 Merge / Split</div>
-    <div class="nav-item" onclick="showPage('image-pdf')">🖼️ Image to PDF</div>
-    <div class="nav-item" onclick="showPage('ocr')">👁️ OCR Scanner</div>
+    <div class="nav-item" onclick="showPage('pdf-compress')">??? Compress PDF</div>
+    <div class="nav-item" onclick="showPage('pdf-merge')">?? Merge / Split</div>
+    <div class="nav-item" onclick="showPage('image-pdf')">??? Image to PDF</div>
+    <div class="nav-item" onclick="showPage('ocr')">??? OCR Scanner</div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">OFFICE TOOLS</div>
-    <div class="nav-item" onclick="showPage('word')">📝 Word Creator</div>
-    <div class="nav-item" onclick="showPage('excel')">📊 Spreadsheet</div>
-    <div class="nav-item" onclick="showPage('ppt')">📽️ Presentation</div>
+    <div class="nav-item" onclick="showPage('word')">?? Word Creator</div>
+    <div class="nav-item" onclick="showPage('excel')">?? Spreadsheet</div>
+    <div class="nav-item" onclick="showPage('ppt')">??? Presentation</div>
   </div>
   <div class="sidebar-section">
     <div class="sidebar-label">UTILITIES</div>
-    <div class="nav-item" onclick="showPage('qr')">⬛ QR Code</div>
+    <div class="nav-item" onclick="showPage('qr')">? QR Code</div>
     <div class="nav-item" onclick="showPage('barcode')">|||| Barcode</div>
   </div>
   <div class="sidebar-footer">
-    <div id="plan-badge" style="background:rgba(61,127,255,0.1);color:#3d7fff;border:1px solid rgba(61,127,255,0.2);padding:6px 10px;border-radius:8px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:8px;text-align:center;cursor:pointer" onclick="showPage('pricing')">FREE — 5 uses/day</div>
+    <div id="plan-badge" style="background:rgba(61,127,255,0.1);color:#3d7fff;border:1px solid rgba(61,127,255,0.2);padding:6px 10px;border-radius:8px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:8px;text-align:center;cursor:pointer" onclick="showPage('pricing')">FREE � 5 uses/day</div>
     <div id="user-info" style="font-size:11px;color:#7a8aaa;font-family:'DM Mono',monospace;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
     <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#3d4f6e;font-family:'DM Mono',monospace"><div class="dot"></div> NNIT Office Suite</div>
   </div>
@@ -172,8 +172,8 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
     <div class="topbar-title" id="topbar-title">Dashboard</div>
     <div style="display:flex;gap:8px;align-items:center">
       <div id="usage-display" style="font-size:11px;color:#7a8aaa;font-family:'DM Mono',monospace"></div>
-      <button class="btn btn-warning btn-sm" onclick="showPage('pricing')">⭐ Upgrade</button>
-      <button class="btn btn-secondary btn-sm" onclick="showApiModal()">🔑 API Key</button>
+      <button class="btn btn-warning btn-sm" onclick="showPage('pricing')">? Upgrade</button>
+      <button class="btn btn-secondary btn-sm" onclick="showApiModal()">?? API Key</button>
       <div class="user-avatar" id="user-avatar" onclick="showUserMenu()" title="Account">?</div>
     </div>
   </div>
@@ -184,10 +184,10 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
 <!-- USER MENU -->
 <div class="modal-overlay" id="user-modal" style="display:none">
   <div class="modal">
-    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:16px">👤 My Account</h2>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:16px">?? My Account</h2>
     <div id="user-modal-info" style="background:var(--bg);padding:14px;border-radius:8px;margin-bottom:16px;font-size:13px;line-height:2"></div>
     <div style="display:flex;gap:8px">
-      <button class="btn btn-primary" onclick="refreshPlan()">🔄 Refresh Plan</button>
+      <button class="btn btn-primary" onclick="refreshPlan()">?? Refresh Plan</button>
       <button class="btn btn-danger" onclick="logout()">Sign Out</button>
       <button class="btn btn-secondary" onclick="closeUserModal()">Close</button>
     </div>
@@ -197,8 +197,8 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
 <!-- API KEY MODAL -->
 <div class="modal-overlay" id="api-modal" style="display:none">
   <div class="modal">
-    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:8px">🔑 OpenAI API Key</h2>
-    <div class="warning-box">⚠️ Key stored in memory only. Never saved to server.</div>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:8px">?? OpenAI API Key</h2>
+    <div class="warning-box">?? Key stored in memory only. Never saved to server.</div>
     <div class="field"><label>YOUR API KEY</label><input type="password" id="api-key-input" placeholder="sk-proj-..."/></div>
     <div style="display:flex;gap:8px">
       <button class="btn btn-primary" onclick="saveApiKey()">Save</button>
@@ -210,28 +210,28 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
 <!-- UPGRADE MODAL -->
 <div class="modal-overlay" id="upgrade-modal" style="display:none">
   <div class="modal">
-    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:4px">⭐ Upgrade Your Plan</h2>
+    <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:18px;margin-bottom:4px">? Upgrade Your Plan</h2>
     <p style="color:#7a8aaa;font-size:13px;margin-bottom:20px">You have reached your daily limit. Upgrade for unlimited access.</p>
     <div class="grid2" style="gap:12px;margin-bottom:16px">
       <div class="plan-card popular">
-        <div class="badge-pro">⭐ POPULAR</div>
-        <div class="plan-price" style="color:#ffb830">€19.99</div>
+        <div class="badge-pro">? POPULAR</div>
+        <div class="plan-price" style="color:#ffb830">�19.99</div>
         <div class="plan-period">per month</div>
         <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Pro Plan</div>
         <div class="plan-features" style="font-size:11px">
-          ✅ Unlimited AI uses<br>✅ All 13 tools<br>✅ Priority support<br>✅ No daily limits
+          ? Unlimited AI uses<br>? All 13 tools<br>? Priority support<br>? No daily limits
         </div>
-        <button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro — €19.99/mo</button>
+        <button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro � �19.99/mo</button>
       </div>
       <div class="plan-card">
         <div class="badge-ai">BUSINESS</div>
-        <div class="plan-price" style="color:#00e5c0">€49.99</div>
+        <div class="plan-price" style="color:#00e5c0">�49.99</div>
         <div class="plan-period">per month</div>
         <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Business</div>
         <div class="plan-features" style="font-size:11px">
-          ✅ Everything in Pro<br>✅ 5 team members<br>✅ Custom branding<br>✅ API access
+          ? Everything in Pro<br>? 5 team members<br>? Custom branding<br>? API access
         </div>
-        <button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business — €49.99/mo</button>
+        <button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business � �49.99/mo</button>
       </div>
     </div>
     <button class="btn btn-secondary btn-full" onclick="closeUpgradeModal()">Maybe Later</button>
@@ -314,9 +314,9 @@ function updateUserUI() {
   if (userInfo) userInfo.textContent = email === "guest" ? "Guest Mode" : email;
   const badge = document.getElementById("plan-badge");
   if (badge) {
-    if (plan === "free") { badge.textContent = "FREE — 5 uses/day"; badge.style.color = "#3d7fff"; }
-    else if (plan === "pro") { badge.textContent = "⭐ PRO — Unlimited"; badge.style.color = "#ffb830"; }
-    else { badge.textContent = "💼 BUSINESS — Unlimited"; badge.style.color = "#00e5c0"; }
+    if (plan === "free") { badge.textContent = "FREE � 5 uses/day"; badge.style.color = "#3d7fff"; }
+    else if (plan === "pro") { badge.textContent = "? PRO � Unlimited"; badge.style.color = "#ffb830"; }
+    else { badge.textContent = "?? BUSINESS � Unlimited"; badge.style.color = "#00e5c0"; }
   }
 }
 
@@ -389,7 +389,7 @@ function updateUsageDisplay() {
   const el = document.getElementById("usage-display");
   if (!el) return;
   if (plan === "free") { const r = Math.max(0, 5 - getUsage().count); el.textContent = r + " AI uses left"; }
-  else el.textContent = plan.toUpperCase() + " — Unlimited";
+  else el.textContent = plan.toUpperCase() + " � Unlimited";
 }
 
 function showUpgradeModal() { document.getElementById("upgrade-modal").style.display = "flex"; }
@@ -405,7 +405,7 @@ function showToast(msg, color) {
 }
 
 async function callAI(sys, user) {
-  if (!canUseAI()) { showUpgradeModal(); throw new Error("Daily limit reached — upgrade for unlimited access"); }
+  if (!canUseAI()) { showUpgradeModal(); throw new Error("Daily limit reached � upgrade for unlimited access"); }
   if (!API_KEY) { showApiModal(); throw new Error("Please set your OpenAI API key first"); }
   incrementUsage();
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -437,63 +437,63 @@ function renderPricing() {
   <div class="grid3" style="margin-bottom:24px">
     <div class="plan-card ${plan==="free"?"popular":""}">
       <div class="badge-free">FREE</div>
-      <div class="plan-price" style="color:#3d7fff">€0</div><div class="plan-period">forever</div>
+      <div class="plan-price" style="color:#3d7fff">�0</div><div class="plan-period">forever</div>
       <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Free Plan</div>
-      <div class="plan-features">✅ 5 AI uses per day<br>✅ All 13 tools<br>✅ QR and Barcode unlimited<br>✅ Image to PDF<br>❌ No priority support</div>
-      <div style="text-align:center;color:#3d7fff;font-size:12px;font-family:'DM Mono',monospace">${plan==="free"?"✓ CURRENT PLAN":"Free Forever"}</div>
+      <div class="plan-features">? 5 AI uses per day<br>? All 13 tools<br>? QR and Barcode unlimited<br>? Image to PDF<br>? No priority support</div>
+      <div style="text-align:center;color:#3d7fff;font-size:12px;font-family:'DM Mono',monospace">${plan==="free"?"? CURRENT PLAN":"Free Forever"}</div>
     </div>
     <div class="plan-card popular">
-      <div class="badge-pro">⭐ MOST POPULAR</div>
-      <div class="plan-price" style="color:#ffb830">€19.99</div><div class="plan-period">per month</div>
+      <div class="badge-pro">? MOST POPULAR</div>
+      <div class="plan-price" style="color:#ffb830">�19.99</div><div class="plan-period">per month</div>
       <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Pro Plan</div>
-      <div class="plan-features">✅ Unlimited AI uses<br>✅ All 13 tools<br>✅ Priority support<br>✅ No daily limits<br>✅ Early access features</div>
-      ${plan==="pro"?'<div style="text-align:center;color:#ffb830;font-size:12px;font-family:\'DM Mono\',monospace">✓ CURRENT PLAN</div>':`<button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro — €19.99/mo</button>`}
+      <div class="plan-features">? Unlimited AI uses<br>? All 13 tools<br>? Priority support<br>? No daily limits<br>? Early access features</div>
+      ${plan==="pro"?'<div style="text-align:center;color:#ffb830;font-size:12px;font-family:\'DM Mono\',monospace">? CURRENT PLAN</div>':`<button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro � �19.99/mo</button>`}
     </div>
     <div class="plan-card ${plan==="business"?"popular":""}">
       <div class="badge-ai">BUSINESS</div>
-      <div class="plan-price" style="color:#00e5c0">€49.99</div><div class="plan-period">per month</div>
+      <div class="plan-price" style="color:#00e5c0">�49.99</div><div class="plan-period">per month</div>
       <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Business Plan</div>
-      <div class="plan-features">✅ Everything in Pro<br>✅ 5 team members<br>✅ Custom branding<br>✅ API access<br>✅ Dedicated support</div>
-      ${plan==="business"?'<div style="text-align:center;color:#00e5c0;font-size:12px;font-family:\'DM Mono\',monospace">✓ CURRENT PLAN</div>':`<button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business — €49.99/mo</button>`}
+      <div class="plan-features">? Everything in Pro<br>? 5 team members<br>? Custom branding<br>? API access<br>? Dedicated support</div>
+      ${plan==="business"?'<div style="text-align:center;color:#00e5c0;font-size:12px;font-family:\'DM Mono\',monospace">? CURRENT PLAN</div>':`<button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business � �49.99/mo</button>`}
     </div>
   </div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Your Usage Today</div></div><div class="panel-body">
-    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px">AI Uses Today</span><span style="font-size:13px;font-family:'DM Mono',monospace">${u.count} / ${plan==="free"?"5":"∞"}</span></div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px"><span style="font-size:13px">AI Uses Today</span><span style="font-size:13px;font-family:'DM Mono',monospace">${u.count} / ${plan==="free"?"5":"8"}</span></div>
     ${plan==="free"?`<div class="usage-bar"><div class="usage-fill" style="width:${Math.min(100,(u.count/5)*100)}%"></div></div>`:""}
     <div style="margin-top:12px;font-size:12px;color:#7a8aaa">Account: <strong style="color:var(--text)">${currentUser?.email||"Guest"}</strong></div>
     <div style="margin-top:4px;font-size:12px;color:#7a8aaa">Plan: <strong style="color:var(--text)">${plan.toUpperCase()}</strong></div>
-    <button class="btn btn-secondary btn-sm" style="margin-top:12px" onclick="refreshPlan()">🔄 Refresh Plan After Payment</button>
+    <button class="btn btn-secondary btn-sm" style="margin-top:12px" onclick="refreshPlan()">?? Refresh Plan After Payment</button>
   </div></div>
   <div style="padding:16px;background:rgba(61,127,255,0.06);border:1px solid rgba(61,127,255,0.15);border-radius:10px;font-size:12px;color:#7a8aaa;line-height:1.7">
-    💳 Payments powered by Stripe. Cancel anytime. After payment click <strong style="color:var(--text)">Refresh Plan</strong> above or go to your account menu. Contact: networkniceit@gmail.com
+    ?? Payments powered by Stripe. Cancel anytime. After payment click <strong style="color:var(--text)">Refresh Plan</strong> above or go to your account menu. Contact: networkniceit@gmail.com
   </div>`;
 }
 
 // ===================== HOME =====================
 function renderHome() {
   const plan = currentUser?.plan || "free";
-  const remaining = plan === "free" ? Math.max(0, 5 - getUsage().count) : "∞";
+  const remaining = plan === "free" ? Math.max(0, 5 - getUsage().count) : "8";
   const tools = [
-    {p:"ai-writer",i:"✍️",c:"#3d7fff",n:"AI Writer",d:"Generate letters, reports, contracts"},
-    {p:"ai-reader",i:"🔍",c:"#00e5c0",n:"AI Reader",d:"Analyze and extract from documents"},
-    {p:"translator",i:"🌐",c:"#a855f7",n:"Translator",d:"Translate to 14 languages"},
-    {p:"email",i:"📧",c:"#ff5e5e",n:"Email Composer",d:"Write professional emails instantly"},
-    {p:"pdf-compress",i:"🗜️",c:"#667eea",n:"Compress PDF",d:"Reduce PDF file size"},
-    {p:"pdf-merge",i:"🔗",c:"#ffb830",n:"Merge / Split PDF",d:"Combine or split PDFs"},
-    {p:"image-pdf",i:"🖼️",c:"#fd7e14",n:"Image to PDF",d:"Convert images to PDF"},
-    {p:"ocr",i:"👁️",c:"#00e5c0",n:"OCR Scanner",d:"Extract text from images with AI"},
-    {p:"word",i:"📝",c:"#2563eb",n:"Word Creator",d:"Create and export documents"},
-    {p:"excel",i:"📊",c:"#16a34a",n:"Spreadsheet",d:"Build spreadsheets export CSV"},
-    {p:"ppt",i:"📽️",c:"#dc2626",n:"Presentation",d:"AI generated slide content"},
-    {p:"qr",i:"⬛",c:"#94a3b8",n:"QR Code",d:"Generate QR codes instantly"},
+    {p:"ai-writer",i:"??",c:"#3d7fff",n:"AI Writer",d:"Generate letters, reports, contracts"},
+    {p:"ai-reader",i:"??",c:"#00e5c0",n:"AI Reader",d:"Analyze and extract from documents"},
+    {p:"translator",i:"??",c:"#a855f7",n:"Translator",d:"Translate to 14 languages"},
+    {p:"email",i:"??",c:"#ff5e5e",n:"Email Composer",d:"Write professional emails instantly"},
+    {p:"pdf-compress",i:"???",c:"#667eea",n:"Compress PDF",d:"Reduce PDF file size"},
+    {p:"pdf-merge",i:"??",c:"#ffb830",n:"Merge / Split PDF",d:"Combine or split PDFs"},
+    {p:"image-pdf",i:"???",c:"#fd7e14",n:"Image to PDF",d:"Convert images to PDF"},
+    {p:"ocr",i:"???",c:"#00e5c0",n:"OCR Scanner",d:"Extract text from images with AI"},
+    {p:"word",i:"??",c:"#2563eb",n:"Word Creator",d:"Create and export documents"},
+    {p:"excel",i:"??",c:"#16a34a",n:"Spreadsheet",d:"Build spreadsheets export CSV"},
+    {p:"ppt",i:"???",c:"#dc2626",n:"Presentation",d:"AI generated slide content"},
+    {p:"qr",i:"?",c:"#94a3b8",n:"QR Code",d:"Generate QR codes instantly"},
     {p:"barcode",i:"||||",c:"#64748b",n:"Barcode",d:"Generate CODE128 barcodes"},
   ];
   return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
-    <div><div class="section-title">NNIT Office Suite</div><div style="color:#7a8aaa;font-size:13px">13 professional tools powered by AI — Welcome back, ${currentUser?.email === "guest" ? "Guest" : (currentUser?.email?.split("@")[0] || "User")}!</div></div>
+    <div><div class="section-title">NNIT Office Suite</div><div style="color:#7a8aaa;font-size:13px">13 professional tools powered by AI � Welcome back, ${currentUser?.email === "guest" ? "Guest" : (currentUser?.email?.split("@")[0] || "User")}!</div></div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;text-align:center;min-width:140px">
       <div style="font-size:28px;font-family:'Syne',sans-serif;font-weight:800;color:${plan==="free"?"#3d7fff":"#ffb830"}">${remaining}</div>
       <div style="font-size:11px;color:#7a8aaa;font-family:'DM Mono',monospace">${plan==="free"?"AI uses left today":"UNLIMITED"}</div>
-      ${plan==="free"?`<button class="btn btn-warning btn-sm" style="margin-top:8px;width:100%" onclick="showPage('pricing')">⭐ Upgrade</button>`:`<div style="font-size:10px;color:#ffb830;margin-top:4px;font-family:'DM Mono',monospace">${plan.toUpperCase()} PLAN</div>`}
+      ${plan==="free"?`<button class="btn btn-warning btn-sm" style="margin-top:8px;width:100%" onclick="showPage('pricing')">? Upgrade</button>`:`<div style="font-size:10px;color:#ffb830;margin-top:4px;font-family:'DM Mono',monospace">${plan.toUpperCase()} PLAN</div>`}
     </div>
   </div>
   <div class="home-grid">${tools.map(t=>`<div class="tool-card" onclick="showPage('${t.p}')"><div class="tool-icon" style="background:${t.c}22">${t.i}</div><div class="tool-name">${t.n}</div><div class="tool-desc">${t.d}</div></div>`).join("")}</div>`;
@@ -506,7 +506,7 @@ function renderAIWriter(){return`<div class="section-title">AI Writer <span clas
     <div class="field"><label>TONE</label><select id="doc-tone"><option>Professional</option><option>Formal</option><option>Friendly</option><option>Assertive</option><option>Persuasive</option></select></div>
     <div class="field"><label>LENGTH</label><select id="doc-length"><option>Short</option><option selected>Medium</option><option>Long - Full Document</option></select></div>
     <div class="field"><label>DESCRIBE WHAT YOU NEED</label><textarea id="doc-prompt" rows="5" placeholder="e.g. Complaint letter to internet provider. My name is Solomon. Account 12345."></textarea></div>
-    <button class="btn btn-primary btn-full" onclick="generateDoc()">✍️ Generate Document</button>
+    <button class="btn btn-primary btn-full" onclick="generateDoc()">?? Generate Document</button>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Result</div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-sm" onclick="copyOut('doc-output')">Copy</button><button class="btn btn-success btn-sm" onclick="dlText('doc-output','document.txt')">Download</button></div></div>
   <div class="panel-body"><div id="doc-load" style="display:none"><div class="loading-bar" style="margin-bottom:10px"></div></div><div class="output-box" id="doc-output"><span style="color:#3d4f6e">Your document will appear here...</span></div></div></div></div>`;}
@@ -525,7 +525,7 @@ function renderAIReader(){return`<div class="section-title">AI Reader <span clas
   <div class="chip-tabs">${["Summarize","Extract Key Info","Risk Analysis","Action Items","Generate Questions","Simplify Language","Fact Check"].map((t,i)=>`<div class="chip ${i===0?"active":""}" onclick="selectChip(this,'${t}')">${t}</div>`).join("")}</div>
   <div class="grid2"><div class="panel"><div class="panel-header"><div class="panel-title">Paste Document</div></div><div class="panel-body">
     <textarea id="reader-input" rows="16" placeholder="Paste your document here..."></textarea>
-    <button class="btn btn-primary btn-full" style="margin-top:12px" onclick="analyzeDoc()">🔍 Analyze</button>
+    <button class="btn btn-primary btn-full" style="margin-top:12px" onclick="analyzeDoc()">?? Analyze</button>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Analysis</div><button class="btn btn-secondary btn-sm" onclick="copyOut('reader-output')">Copy</button></div>
   <div class="panel-body"><div id="reader-load" style="display:none"><div class="loading-bar" style="margin-bottom:10px"></div></div><div class="output-box" id="reader-output" style="min-height:340px"><span style="color:#3d4f6e">Results will appear here...</span></div></div></div></div>`;}
@@ -549,7 +549,7 @@ function renderTranslator(){
     <div class="field"><label>FROM</label><select id="src-lang"><option value="auto">Auto Detect</option>${langs.map(l=>`<option>${l}</option>`).join("")}</select></div>
     <div class="field"><label>TO</label><select id="tgt-lang">${langs.map((l,i)=>`<option ${i===0?"selected":""}>${l}</option>`).join("")}</select></div>
     <div class="field"><label>TEXT</label><textarea id="trans-input" rows="10" placeholder="Paste text to translate..."></textarea></div>
-    <button class="btn btn-primary btn-full" onclick="translateText()">🌐 Translate</button>
+    <button class="btn btn-primary btn-full" onclick="translateText()">?? Translate</button>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Translation</div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-sm" onclick="copyOut('trans-output')">Copy</button><button class="btn btn-success btn-sm" onclick="dlText('trans-output','translation.txt')">Download</button></div></div>
   <div class="panel-body"><div id="trans-load" style="display:none"><div class="loading-bar" style="margin-bottom:10px"></div></div><div class="output-box" id="trans-output" style="min-height:280px"><span style="color:#3d4f6e">Translation will appear here...</span></div></div></div></div>`;}
@@ -571,7 +571,7 @@ function renderEmail(){return`<div class="section-title">Email Composer <span cl
     <div class="field"><label>TO</label><input type="text" id="email-to" placeholder="e.g. HR Manager"/></div>
     <div class="field"><label>FROM</label><input type="text" id="email-from" placeholder="e.g. Solomon Omomeje" value="${currentUser?.email !== "guest" ? (currentUser?.email?.split("@")[0] || "") : ""}"/></div>
     <div class="field"><label>KEY POINTS</label><textarea id="email-prompt" rows="4" placeholder="What should the email say?"></textarea></div>
-    <button class="btn btn-primary btn-full" onclick="generateEmail()">📧 Compose Email</button>
+    <button class="btn btn-primary btn-full" onclick="generateEmail()">?? Compose Email</button>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Email</div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-sm" onclick="copyOut('email-output')">Copy</button><button class="btn btn-success btn-sm" onclick="dlText('email-output','email.txt')">Download</button></div></div>
   <div class="panel-body"><div id="email-load" style="display:none"><div class="loading-bar" style="margin-bottom:10px"></div></div><div class="output-box" id="email-output" style="min-height:340px"><span style="color:#3d4f6e">Your email will appear here...</span></div></div></div></div>`;}
@@ -587,7 +587,7 @@ async function generateEmail(){
 // ===================== PDF COMPRESS =====================
 function renderPDFCompress(){return`<div class="section-title">Compress PDF</div><div class="section-sub">Upload a PDF to check its size</div>
   <div style="max-width:500px"><div class="panel"><div class="panel-body">
-    <div class="upload-zone" onclick="document.getElementById('pdf-file').click()"><div style="font-size:30px;margin-bottom:8px">🗜️</div><div style="font-size:13px;color:#7a8aaa">Click to upload PDF</div></div>
+    <div class="upload-zone" onclick="document.getElementById('pdf-file').click()"><div style="font-size:30px;margin-bottom:8px">???</div><div style="font-size:13px;color:#7a8aaa">Click to upload PDF</div></div>
     <input type="file" id="pdf-file" accept=".pdf" style="display:none" onchange="handleCompress(this)">
     <div id="compress-result" style="margin-top:14px;display:none;background:var(--bg);padding:14px;border-radius:8px;border:1px solid var(--border);font-size:13px;color:#7a8aaa;line-height:2"></div>
   </div></div></div>`;}
@@ -598,17 +598,17 @@ function handleCompress(input){const file=input.files[0];if(!file)return;const s
 function renderPDFMerge(){return`<div class="section-title">PDF Merge and Split</div><div class="section-sub">Combine or split PDF files</div>
   <div class="grid2">
     <div class="panel"><div class="panel-header"><div class="panel-title">Merge PDFs</div></div><div class="panel-body">
-      <div class="upload-zone" onclick="document.getElementById('merge-files').click()"><div style="font-size:28px;margin-bottom:6px">🔗</div><div style="font-size:13px;color:#7a8aaa">Select multiple PDFs</div></div>
+      <div class="upload-zone" onclick="document.getElementById('merge-files').click()"><div style="font-size:28px;margin-bottom:6px">??</div><div style="font-size:13px;color:#7a8aaa">Select multiple PDFs</div></div>
       <input type="file" id="merge-files" accept=".pdf" multiple style="display:none" onchange="listFiles(this,'merge-list')">
       <div id="merge-list" style="margin-top:10px"></div>
-      <button class="btn btn-primary btn-full" style="margin-top:10px" onclick="showToast('Merge requires backend server')">🔗 Merge</button>
+      <button class="btn btn-primary btn-full" style="margin-top:10px" onclick="showToast('Merge requires backend server')">?? Merge</button>
     </div></div>
     <div class="panel"><div class="panel-header"><div class="panel-title">Split PDF</div></div><div class="panel-body">
-      <div class="upload-zone" onclick="document.getElementById('split-file').click()"><div style="font-size:28px;margin-bottom:6px">✂️</div><div style="font-size:13px;color:#7a8aaa">Upload PDF to split</div></div>
+      <div class="upload-zone" onclick="document.getElementById('split-file').click()"><div style="font-size:28px;margin-bottom:6px">??</div><div style="font-size:13px;color:#7a8aaa">Upload PDF to split</div></div>
       <input type="file" id="split-file" accept=".pdf" style="display:none" onchange="listFiles(this,'split-list')">
       <div id="split-list" style="margin-top:10px"></div>
       <div class="field" style="margin-top:10px"><label>SPLIT AT PAGE</label><input type="number" id="split-page" placeholder="e.g. 3" min="1"/></div>
-      <button class="btn btn-primary btn-full" onclick="showToast('Split requires backend server')">✂️ Split</button>
+      <button class="btn btn-primary btn-full" onclick="showToast('Split requires backend server')">?? Split</button>
     </div></div>
   </div>`;}
 
@@ -617,10 +617,10 @@ function listFiles(input,id){document.getElementById(id).innerHTML=Array.from(in
 // ===================== IMAGE TO PDF =====================
 function renderImageToPDF(){return`<div class="section-title">Image to PDF</div><div class="section-sub">Convert images to PDF</div>
   <div style="max-width:560px"><div class="panel"><div class="panel-body">
-    <div class="upload-zone" onclick="document.getElementById('img-files').click()"><div style="font-size:28px;margin-bottom:6px">🖼️</div><div style="font-size:13px;color:#7a8aaa">Click to upload images</div><div style="font-size:11px;color:#3d4f6e;margin-top:4px">JPG PNG multiple allowed</div></div>
+    <div class="upload-zone" onclick="document.getElementById('img-files').click()"><div style="font-size:28px;margin-bottom:6px">???</div><div style="font-size:13px;color:#7a8aaa">Click to upload images</div><div style="font-size:11px;color:#3d4f6e;margin-top:4px">JPG PNG multiple allowed</div></div>
     <input type="file" id="img-files" accept="image/*" multiple style="display:none" onchange="previewImgs(this)">
     <div id="img-preview" style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap"></div>
-    <button class="btn btn-primary btn-full" style="margin-top:14px" onclick="convertToPDF()">📄 Convert to PDF</button>
+    <button class="btn btn-primary btn-full" style="margin-top:14px" onclick="convertToPDF()">?? Convert to PDF</button>
   </div></div></div>`;}
 
 function previewImgs(input){const p=document.getElementById("img-preview");p.innerHTML="";Array.from(input.files).forEach(f=>{const img=document.createElement("img");img.style.cssText="width:90px;height:70px;object-fit:cover;border-radius:6px;border:1px solid var(--border)";img.src=URL.createObjectURL(f);p.appendChild(img);});}
@@ -635,11 +635,11 @@ async function convertToPDF(){
 // ===================== OCR =====================
 function renderOCR(){return`<div class="section-title">OCR Scanner <span class="badge-ai" style="vertical-align:middle;margin-left:8px">GPT-4 Vision</span></div><div class="section-sub">Extract text from images using AI</div>
   <div class="grid2"><div class="panel"><div class="panel-header"><div class="panel-title">Upload Image</div></div><div class="panel-body">
-    <div class="upload-zone" onclick="document.getElementById('ocr-file').click()"><div style="font-size:28px;margin-bottom:6px">👁️</div><div style="font-size:13px;color:#7a8aaa">Upload image to scan</div></div>
+    <div class="upload-zone" onclick="document.getElementById('ocr-file').click()"><div style="font-size:28px;margin-bottom:6px">???</div><div style="font-size:13px;color:#7a8aaa">Upload image to scan</div></div>
     <input type="file" id="ocr-file" accept="image/*" style="display:none" onchange="previewOCR(this)">
     <div id="ocr-preview" style="margin-top:10px"></div>
     <div class="field" style="margin-top:10px"><label>MODE</label><select id="ocr-mode"><option value="extract">Extract All Text</option><option value="table">Extract as Table</option><option value="form">Extract Form Fields</option><option value="handwriting">Handwriting Recognition</option></select></div>
-    <button class="btn btn-primary btn-full" onclick="runOCR()">👁️ Extract Text</button>
+    <button class="btn btn-primary btn-full" onclick="runOCR()">??? Extract Text</button>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Extracted Text</div><button class="btn btn-secondary btn-sm" onclick="copyOut('ocr-output')">Copy</button></div>
   <div class="panel-body"><div id="ocr-load" style="display:none"><div class="loading-bar" style="margin-bottom:10px"></div></div><div class="output-box" id="ocr-output" style="min-height:300px"><span style="color:#3d4f6e">Extracted text will appear here...</span></div></div></div></div>`;}
@@ -668,27 +668,27 @@ function renderWord(){return`<div class="section-title">Word Creator</div><div c
     <div class="field"><label>AUTHOR</label><input type="text" id="word-author" placeholder="Solomon Omomeje Ayodele"/></div>
     <div class="field"><label>CONTENT</label><textarea id="word-content" rows="11" placeholder="Write content or use AI Generate..."></textarea></div>
     <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button class="btn btn-secondary" onclick="aiWord()">✨ AI Generate</button>
-      <button class="btn btn-primary" onclick="dlWord()">📄 txt</button>
-      <button class="btn btn-success btn-sm" onclick="dlWordHTML()">🌐 HTML</button>
+      <button class="btn btn-secondary" onclick="aiWord()">? AI Generate</button>
+      <button class="btn btn-primary" onclick="dlWord()">?? txt</button>
+      <button class="btn btn-success btn-sm" onclick="dlWordHTML()">?? HTML</button>
     </div>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Preview</div></div>
   <div class="panel-body"><div id="word-preview" style="background:white;color:#1a1a1a;padding:32px;border-radius:8px;min-height:380px;font-family:Georgia,serif;font-size:14px;line-height:1.8;white-space:pre-wrap"></div></div></div></div>`;}
 
 async function aiWord(){const title=document.getElementById("word-title").value||"Document";const existing=document.getElementById("word-content").value;try{const r=await callAI("You are a professional document writer.","Write a complete professional document titled: "+title+(existing?". Expand on: "+existing:""));document.getElementById("word-content").value=r;updateWordPreview();}catch(e){showToast(e.message);}}
-function updateWordPreview(){const title=document.getElementById("word-title")?.value||"";const author=document.getElementById("word-author")?.value||"";const content=document.getElementById("word-content")?.value||"";const p=document.getElementById("word-preview");if(p)p.innerHTML=`<div style="border-bottom:2px solid #3d7fff;padding-bottom:12px;margin-bottom:16px"><h1 style="font-size:18px;font-family:'Syne',sans-serif;color:#1a1a1a">${title}</h1>${author?`<div style="color:#666;font-size:11px;margin-top:4px">${author} · ${new Date().toLocaleDateString()}</div>`:""}</div><div>${content.replace(/\n/g,"<br>")}</div>`;}
+function updateWordPreview(){const title=document.getElementById("word-title")?.value||"";const author=document.getElementById("word-author")?.value||"";const content=document.getElementById("word-content")?.value||"";const p=document.getElementById("word-preview");if(p)p.innerHTML=`<div style="border-bottom:2px solid #3d7fff;padding-bottom:12px;margin-bottom:16px"><h1 style="font-size:18px;font-family:'Syne',sans-serif;color:#1a1a1a">${title}</h1>${author?`<div style="color:#666;font-size:11px;margin-top:4px">${author} � ${new Date().toLocaleDateString()}</div>`:""}</div><div>${content.replace(/\n/g,"<br>")}</div>`;}
 function dlWord(){const title=document.getElementById("word-title").value||"document";const b=new Blob([document.getElementById("word-content").value],{type:"text/plain"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=title.replace(/\s+/g,"-")+".txt";a.click();showToast("Downloaded!");}
-function dlWordHTML(){const title=document.getElementById("word-title").value||"document";const author=document.getElementById("word-author").value||"";const content=document.getElementById("word-content").value;const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:60px auto;padding:0 40px;color:#1a1a1a;line-height:1.8}h1{border-bottom:2px solid #3d7fff;padding-bottom:12px}.meta{color:#666;font-size:12px;margin-bottom:28px}.content{white-space:pre-wrap}</style></head><body><h1>${title}</h1><div class="meta">${author} · ${new Date().toLocaleDateString()}</div><div class="content">${content}</div></body></html>`;const b=new Blob([html],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=title.replace(/\s+/g,"-")+".html";a.click();showToast("HTML downloaded!");}
+function dlWordHTML(){const title=document.getElementById("word-title").value||"document";const author=document.getElementById("word-author").value||"";const content=document.getElementById("word-content").value;const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:60px auto;padding:0 40px;color:#1a1a1a;line-height:1.8}h1{border-bottom:2px solid #3d7fff;padding-bottom:12px}.meta{color:#666;font-size:12px;margin-bottom:28px}.content{white-space:pre-wrap}</style></head><body><h1>${title}</h1><div class="meta">${author} � ${new Date().toLocaleDateString()}</div><div class="content">${content}</div></body></html>`;const b=new Blob([html],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=title.replace(/\s+/g,"-")+".html";a.click();showToast("HTML downloaded!");}
 
 // ===================== EXCEL =====================
 function renderExcel(){
   const cols=["A","B","C","D","E","F"];let bodyRows="";
   for(let r=1;r<=10;r++){bodyRows+=`<tr><td style="color:#3d4f6e;font-family:'DM Mono',monospace;font-size:11px;padding:5px 8px;border-bottom:1px solid var(--border);border-right:1px solid var(--border);width:30px">${r}</td>`;cols.forEach(c=>{bodyRows+=`<td><input class="ecell" id="c-${c}${r}" type="text"/></td>`;});bodyRows+=`</tr>`;}
   return`<div class="section-title">Spreadsheet</div><div class="section-sub">Build data tables and export as CSV</div>
-  <div class="panel"><div class="panel-header"><div class="panel-title">Editor</div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-sm" onclick="aiSheet()">✨ AI Fill</button><button class="btn btn-success btn-sm" onclick="exportCSV()">📊 Export CSV</button></div></div>
+  <div class="panel"><div class="panel-header"><div class="panel-title">Editor</div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-sm" onclick="aiSheet()">? AI Fill</button><button class="btn btn-success btn-sm" onclick="exportCSV()">?? Export CSV</button></div></div>
   <div class="panel-body" style="overflow-x:auto"><table><thead><tr><th style="width:30px"></th>${cols.map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${bodyRows}</tbody></table></div></div>
-  <div class="panel"><div class="panel-body"><div class="field"><label>AI PROMPT</label><input type="text" id="sheet-prompt" placeholder="e.g. Monthly budget for 6 months"/></div><button class="btn btn-primary" onclick="aiSheet()">✨ AI Generate Data</button></div></div>`;}
+  <div class="panel"><div class="panel-body"><div class="field"><label>AI PROMPT</label><input type="text" id="sheet-prompt" placeholder="e.g. Monthly budget for 6 months"/></div><button class="btn btn-primary" onclick="aiSheet()">? AI Generate Data</button></div></div>`;}
 
 async function aiSheet(){const prompt=document.getElementById("sheet-prompt")?.value||"sample business data";try{const r=await callAI("Return ONLY CSV with 6 columns and 10 rows including header. No explanation.",`Generate spreadsheet: ${prompt}`);const rows=r.trim().split("\n");const cols=["A","B","C","D","E","F"];rows.forEach((row,ri)=>{if(ri>=10)return;row.split(",").forEach((v,ci)=>{const el=document.getElementById(`c-${cols[ci]}${ri+1}`);if(el)el.value=v.trim().replace(/^"|"$/g,"");});});showToast("AI data filled!");}catch(e){showToast(e.message);}}
 function exportCSV(){const cols=["A","B","C","D","E","F"];let csv="";for(let r=1;r<=10;r++){csv+=cols.map(c=>document.getElementById(`c-${c}${r}`)?.value||"").join(",")+"\n";}const b=new Blob([csv],{type:"text/csv"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="spreadsheet.csv";a.click();showToast("CSV downloaded!");}
@@ -700,7 +700,7 @@ function renderPPT(){return`<div class="section-title">Presentation Creator <spa
     <div class="field"><label>SLIDES</label><select id="ppt-slides"><option>5</option><option>8</option><option selected>10</option><option>12</option><option>15</option></select></div>
     <div class="field"><label>STYLE</label><select id="ppt-style"><option>Corporate</option><option>Creative</option><option>Academic</option><option>Startup Pitch</option><option>Training</option></select></div>
     <div class="field"><label>TOPICS</label><textarea id="ppt-topics" rows="5" placeholder="Describe what the presentation should cover..."></textarea></div>
-    <button class="btn btn-primary btn-full" onclick="generatePPT()">📽️ Generate Slides</button>
+    <button class="btn btn-primary btn-full" onclick="generatePPT()">??? Generate Slides</button>
   </div></div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Slide Content</div><div style="display:flex;gap:6px"><button class="btn btn-secondary btn-sm" onclick="copyOut('ppt-output')">Copy</button><button class="btn btn-success btn-sm" onclick="dlText('ppt-output','slides.txt')">Download</button></div></div>
   <div class="panel-body"><div id="ppt-load" style="display:none"><div class="loading-bar" style="margin-bottom:10px"></div></div><div class="output-box" id="ppt-output" style="min-height:340px"><span style="color:#3d4f6e">Slides will appear here...</span></div></div></div></div>`;}
@@ -719,9 +719,9 @@ function renderQR(){return`<div class="section-title">QR Code Generator</div><di
     <div class="field"><label>TYPE</label><select id="qr-type"><option value="url">URL</option><option value="text">Plain Text</option><option value="email">Email</option><option value="phone">Phone</option><option value="sms">SMS</option></select></div>
     <div class="field"><label>CONTENT</label><input type="text" id="qr-text" placeholder="https://nnit-office.vercel.app"/></div>
     <div class="field"><label>SIZE</label><select id="qr-size"><option value="128">Small</option><option value="200" selected>Medium</option><option value="300">Large</option></select></div>
-    <button class="btn btn-primary" onclick="makeQR()">⬛ Generate QR</button>
+    <button class="btn btn-primary" onclick="makeQR()">? Generate QR</button>
     <div id="qr-out" style="margin-top:20px;text-align:center"></div>
-    <div style="text-align:center;margin-top:10px"><button id="qr-dl" class="btn btn-success btn-sm" style="display:none" onclick="dlQR()">⬇️ Download PNG</button></div>
+    <div style="text-align:center;margin-top:10px"><button id="qr-dl" class="btn btn-success btn-sm" style="display:none" onclick="dlQR()">?? Download PNG</button></div>
   </div></div></div>`;}
 
 function makeQR(){const text=document.getElementById("qr-text").value;const type=document.getElementById("qr-type").value;const size=parseInt(document.getElementById("qr-size").value);if(!text){showToast("Enter content first");return;}let content=text;if(type==="email")content="mailto:"+text;else if(type==="phone")content="tel:"+text;else if(type==="sms")content="sms:"+text;const div=document.getElementById("qr-out");div.innerHTML="";const qDiv=document.createElement("div");qDiv.id="qr-canvas";div.appendChild(qDiv);new QRCode(qDiv,{text:content,width:size,height:size,colorDark:"#000000",colorLight:"#ffffff"});document.getElementById("qr-dl").style.display="inline-flex";showToast("QR Code ready!");}
@@ -736,7 +736,7 @@ function renderBarcode(){return`<div class="section-title">Barcode Generator</di
       <canvas id="bc-canvas"></canvas>
       <div id="bc-label" style="color:#1a1a1a;font-family:'DM Mono',monospace;font-size:14px;margin-top:8px;letter-spacing:3px"></div>
     </div>
-    <div style="text-align:center;margin-top:10px"><button id="bc-dl" class="btn btn-success btn-sm" style="display:none" onclick="dlBarcode()">⬇️ Download PNG</button></div>
+    <div style="text-align:center;margin-top:10px"><button id="bc-dl" class="btn btn-success btn-sm" style="display:none" onclick="dlBarcode()">?? Download PNG</button></div>
   </div></div></div>`;}
 
 function makeBarcode(){const text=document.getElementById("bc-text").value;if(!text){showToast("Enter a value");return;}document.getElementById("bc-out").style.display="block";document.getElementById("bc-label").textContent=text;document.getElementById("bc-dl").style.display="inline-flex";const canvas=document.getElementById("bc-canvas");const ctx=canvas.getContext("2d");canvas.width=300;canvas.height=80;ctx.fillStyle="white";ctx.fillRect(0,0,300,80);ctx.fillStyle="black";let x=10;text.split("").map(c=>c.charCodeAt(0)).forEach(code=>{code.toString(2).padStart(8,"0").split("").forEach(bit=>{if(bit==="1")ctx.fillRect(x,5,2,60);x+=3;});});ctx.fillRect(x+2,5,3,60);ctx.fillRect(x+8,5,1,60);ctx.fillRect(x+12,5,3,60);showToast("Barcode ready!");}
@@ -751,9 +751,10 @@ const savedEmail = localStorage.getItem("nnit_email");
 const savedToken = localStorage.getItem("nnit_token");
 const savedPlan = localStorage.getItem("nnit_plan");
 if (savedEmail && savedToken) {
-  currentUser = {email: savedEmail, plan: savedPlan || "free", token: savedToken};
+  currentUser = {email: savedEmail, plan: (savedPlan && savedPlan !== "undefined" && savedPlan !== "null") ? savedPlan : "free", token: savedToken};
   launchApp();
 }
 </script>
 </body>
 </html>
+
