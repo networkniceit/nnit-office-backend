@@ -201,6 +201,20 @@ app.post("/seed-large", async (req, res) => {
   } catch(e){res.status(500).json({error:e.message});}
 });
 
+app.post("/ai", async (req, res) => {
+  try {
+    const {prompt, system} = req.body;
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {"Content-Type":"application/json","Authorization":`Bearer ${process.env.OPENAI_API_KEY}`},
+      body: JSON.stringify({model:"gpt-4o", max_tokens:1500, messages:[{role:"system",content:system},{role:"user",content:prompt}]})
+    });
+    const data = await response.json();
+    if(!response.ok) throw new Error(data.error?.message || "AI Error");
+    res.json({result: data.choices[0].message.content});
+  } catch(e) {res.status(500).json({error:e.message});}
+});
+
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log("NNIT Backend v2 running on port", PORT));
 
