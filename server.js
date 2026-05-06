@@ -1,4 +1,4 @@
-require('dotenv').config();
+﻿require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
@@ -218,3 +218,31 @@ app.post("/ai", async (req, res) => {
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log("NNIT Backend v2 running on port", PORT));
 
+
+// Translate endpoint
+app.post("/api/translate", async (req, res) => {
+  try {
+    const { text, targetLang } = req.body;
+    if (!text || !targetLang) return res.status(400).json({ error: "text and targetLang required" });
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + process.env.GROQ_API_KEY
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: "Translate this to " + targetLang + ". Reply with only the translation, nothing else: " + text }]
+      })
+    });
+    const data = await response.json();
+    if (data.choices && data.choices[0]) {
+      res.json({ result: data.choices[0].message.content });
+    } else {
+      res.status(500).json({ error: data.error?.message || "Translation failed" });
+    }
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
