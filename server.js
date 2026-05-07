@@ -204,10 +204,10 @@ app.post("/seed-large", async (req, res) => {
 app.post("/ai", async (req, res) => {
   try {
     const {prompt, system} = req.body;
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
-      headers: {"Content-Type":"application/json","Authorization":`Bearer ${process.env.OPENAI_API_KEY}`},
-      body: JSON.stringify({model:"gpt-4o", max_tokens:1500, messages:[{role:"system",content:system},{role:"user",content:prompt}]})
+      headers: {"Content-Type":"application/json","Authorization":`Bearer ${process.env.GROQ_API_KEY}`},
+      body: JSON.stringify({model:"llama-3.3-70b-versatile", max_tokens:1500, messages:[{role:"system",content:system},{role:"user",content:prompt}]})
     });
     const data = await response.json();
     if(!response.ok) throw new Error(data.error?.message || "AI Error");
@@ -246,3 +246,4 @@ app.post("/api/translate", async (req, res) => {
     res.status(500).json({ error: e.message });
   }
 });
+
