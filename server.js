@@ -1,4 +1,5 @@
 ﻿require('dotenv').config();
+const {Buffer} = require("buffer");
 const express = require("express");
 const cors = require("cors");
 const crypto = require("crypto");
@@ -248,4 +249,28 @@ app.post("/api/translate", async (req, res) => {
 });
 
 
+// OCR endpoint
+app.post("/ocr", async (req, res) => {
+  try {
+    const { base64 } = req.body;
+    if (!base64) return res.status(400).json({ error: "base64 required" });
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + process.env.GROQ_API_KEY },
+      body: JSON.stringify({
+        model: "meta-llama/llama-4-scout-17b-16e-instruct",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: [
+          { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64}` } },
+          { type: "text", text: "Extract ALL text from this image exactly as it appears. Return only the extracted text, nothing else." }
+        ]}]
+      })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data.error?.message || "OCR failed");
+    res.json({ result: data.choices[0].message.content });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 // force redeploy
+
