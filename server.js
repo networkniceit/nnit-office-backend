@@ -274,6 +274,18 @@ app.post("/ocr", async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+// Admin password reset
+app.post("/reset-admin", async (req, res) => {
+  try {
+    const { adminKey, email, newPassword } = req.body;
+    if (adminKey !== process.env.ADMIN_KEY) return res.status(401).json({ error: "Unauthorized" });
+    const crypto = require("crypto");
+    const hashed = crypto.createHash("sha256").update(newPassword).digest("hex");
+    await User.updateOne({ email }, { password: hashed });
+    res.json({ success: true });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 // OpenAI-compatible endpoint for web app
 app.post("/ai-compat", async (req, res) => {
   try {
@@ -296,6 +308,7 @@ app.post("/ai-compat", async (req, res) => {
 });
 
 // force redeploy
+
 
 
 
