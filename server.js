@@ -266,11 +266,14 @@ app.post("/ocr", async (req, res) => {
         ]}]
       })
     });
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error?.message || "OCR failed");
+    const text = await response.text();
+    let data;
+    try { data = JSON.parse(text); } catch(e) { return res.status(500).json({ error: "Groq returned invalid response" }); }
+    if (!response.ok) return res.status(500).json({ error: data.error?.message || "OCR failed" });
     res.json({ result: data.choices[0].message.content });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 // force redeploy
+
 
