@@ -8,7 +8,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: "50mb"}));
 app.use("/webhook", express.raw({type: "application/json"}));
 
 mongoose.connect(process.env.MONGODB_URI).then(() => console.log("MongoDB connected")).catch(console.error);
@@ -275,5 +275,6 @@ app.post("/ocr", async (req, res) => {
 });
 
 // force redeploy
+
 
 
