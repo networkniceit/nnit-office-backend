@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -162,7 +162,7 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
     <div class="nav-item" onclick="showPage('barcode')">|||| Barcode</div>
   </div>
   <div class="sidebar-footer">
-    <div id="plan-badge" style="background:rgba(61,127,255,0.1);color:#3d7fff;border:1px solid rgba(61,127,255,0.2);padding:6px 10px;border-radius:8px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:8px;text-align:center;cursor:pointer" onclick="showPage('pricing')">FREE — 5 uses/day</div>
+    <div id="plan-badge" style="background:rgba(61,127,255,0.1);color:#3d7fff;border:1px solid rgba(61,127,255,0.2);padding:6px 10px;border-radius:8px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:8px;text-align:center;cursor:pointer" onclick="showPage('pricing')">FREE â€” 5 uses/day</div>
     <div id="user-info" style="font-size:11px;color:#7a8aaa;font-family:'DM Mono',monospace;margin-bottom:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
     <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#3d4f6e;font-family:'DM Mono',monospace"><div class="dot"></div> NNIT Office Suite</div>
   </div>
@@ -215,23 +215,23 @@ td{padding:6px 8px;border-bottom:1px solid var(--border);}
     <div class="grid2" style="gap:12px;margin-bottom:16px">
       <div class="plan-card popular">
         <div class="badge-pro">? POPULAR</div>
-        <div class="plan-price" style="color:#ffb830">€19.99</div>
+        <div class="plan-price" style="color:#ffb830">â‚¬19.99</div>
         <div class="plan-period">per month</div>
         <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Pro Plan</div>
         <div class="plan-features" style="font-size:11px">
           ? Unlimited AI uses<br>? All 13 tools<br>? Priority support<br>? No daily limits
         </div>
-        <button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro — €19.99/mo</button>
+        <button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro â€” â‚¬19.99/mo</button>
       </div>
       <div class="plan-card">
         <div class="badge-ai">BUSINESS</div>
-        <div class="plan-price" style="color:#00e5c0">€49.99</div>
+        <div class="plan-price" style="color:#00e5c0">â‚¬49.99</div>
         <div class="plan-period">per month</div>
         <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Business</div>
         <div class="plan-features" style="font-size:11px">
           ? Everything in Pro<br>? 5 team members<br>? Custom branding<br>? API access
         </div>
-        <button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business — €49.99/mo</button>
+        <button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business â€” â‚¬49.99/mo</button>
       </div>
     </div>
     <button class="btn btn-secondary btn-full" onclick="closeUpgradeModal()">Maybe Later</button>
@@ -314,9 +314,9 @@ function updateUserUI() {
   if (userInfo) userInfo.textContent = email === "guest" ? "Guest Mode" : email;
   const badge = document.getElementById("plan-badge");
   if (badge) {
-    if (plan === "free") { badge.textContent = "FREE — 5 uses/day"; badge.style.color = "#3d7fff"; }
-    else if (plan === "pro") { badge.textContent = "? PRO — Unlimited"; badge.style.color = "#ffb830"; }
-    else { badge.textContent = "?? BUSINESS — Unlimited"; badge.style.color = "#00e5c0"; }
+    if (plan === "free") { badge.textContent = "FREE â€” 5 uses/day"; badge.style.color = "#3d7fff"; }
+    else if (plan === "pro") { badge.textContent = "? PRO â€” Unlimited"; badge.style.color = "#ffb830"; }
+    else { badge.textContent = "?? BUSINESS â€” Unlimited"; badge.style.color = "#00e5c0"; }
   }
 }
 
@@ -389,7 +389,7 @@ function updateUsageDisplay() {
   const el = document.getElementById("usage-display");
   if (!el) return;
   if (plan === "free") { const r = Math.max(0, 5 - getUsage().count); el.textContent = r + " AI uses left"; }
-  else el.textContent = plan.toUpperCase() + " — Unlimited";
+  else el.textContent = plan.toUpperCase() + " â€” Unlimited";
 }
 
 function showUpgradeModal() { document.getElementById("upgrade-modal").style.display = "flex"; }
@@ -405,17 +405,16 @@ function showToast(msg, color) {
 }
 
 async function callAI(sys, user) {
-  if (!canUseAI()) { showUpgradeModal(); throw new Error("Daily limit reached — upgrade for unlimited access"); }
-  if (!API_KEY) { showApiModal(); throw new Error("Please set your OpenAI API key first"); }
+  if (!canUseAI()) { showUpgradeModal(); throw new Error("Daily limit reached"); }
   incrementUsage();
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
+  const res = await fetch("https://nnit-office-backend-production.up.railway.app/ai", {
     method: "POST",
-    headers: {"Content-Type": "application/json", "Authorization": "Bearer " + API_KEY},
-    body: JSON.stringify({model: "gpt-4", max_tokens: 2000, messages: [{role: "system", content: sys}, {role: "user", content: user}]})
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({prompt: user, system: sys})
   });
   const data = await res.json();
-  if (data.error) throw new Error(data.error.message);
-  return data.choices[0].message.content;
+  if (data.error) throw new Error(data.error);
+  return data.result;
 }
 
 // ===================== NAVIGATION =====================
@@ -437,24 +436,24 @@ function renderPricing() {
   <div class="grid3" style="margin-bottom:24px">
     <div class="plan-card ${plan==="free"?"popular":""}">
       <div class="badge-free">FREE</div>
-      <div class="plan-price" style="color:#3d7fff">€0</div><div class="plan-period">forever</div>
+      <div class="plan-price" style="color:#3d7fff">â‚¬0</div><div class="plan-period">forever</div>
       <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Free Plan</div>
       <div class="plan-features">? 5 AI uses per day<br>? All 13 tools<br>? QR and Barcode unlimited<br>? Image to PDF<br>? No priority support</div>
       <div style="text-align:center;color:#3d7fff;font-size:12px;font-family:'DM Mono',monospace">${plan==="free"?"? CURRENT PLAN":"Free Forever"}</div>
     </div>
     <div class="plan-card popular">
       <div class="badge-pro">? MOST POPULAR</div>
-      <div class="plan-price" style="color:#ffb830">€19.99</div><div class="plan-period">per month</div>
+      <div class="plan-price" style="color:#ffb830">â‚¬19.99</div><div class="plan-period">per month</div>
       <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Pro Plan</div>
       <div class="plan-features">? Unlimited AI uses<br>? All 13 tools<br>? Priority support<br>? No daily limits<br>? Early access features</div>
-      ${plan==="pro"?'<div style="text-align:center;color:#ffb830;font-size:12px;font-family:\'DM Mono\',monospace">? CURRENT PLAN</div>':`<button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro — €19.99/mo</button>`}
+      ${plan==="pro"?'<div style="text-align:center;color:#ffb830;font-size:12px;font-family:\'DM Mono\',monospace">? CURRENT PLAN</div>':`<button class="btn btn-warning btn-full" onclick="openCheckout('pro')">Get Pro â€” â‚¬19.99/mo</button>`}
     </div>
     <div class="plan-card ${plan==="business"?"popular":""}">
       <div class="badge-ai">BUSINESS</div>
-      <div class="plan-price" style="color:#00e5c0">€49.99</div><div class="plan-period">per month</div>
+      <div class="plan-price" style="color:#00e5c0">â‚¬49.99</div><div class="plan-period">per month</div>
       <div style="font-family:'Syne',sans-serif;font-weight:700;margin-top:8px">Business Plan</div>
       <div class="plan-features">? Everything in Pro<br>? 5 team members<br>? Custom branding<br>? API access<br>? Dedicated support</div>
-      ${plan==="business"?'<div style="text-align:center;color:#00e5c0;font-size:12px;font-family:\'DM Mono\',monospace">? CURRENT PLAN</div>':`<button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business — €49.99/mo</button>`}
+      ${plan==="business"?'<div style="text-align:center;color:#00e5c0;font-size:12px;font-family:\'DM Mono\',monospace">? CURRENT PLAN</div>':`<button class="btn btn-success btn-full" onclick="openCheckout('business')">Get Business â€” â‚¬49.99/mo</button>`}
     </div>
   </div>
   <div class="panel"><div class="panel-header"><div class="panel-title">Your Usage Today</div></div><div class="panel-body">
@@ -489,7 +488,7 @@ function renderHome() {
     {p:"barcode",i:"||||",c:"#64748b",n:"Barcode",d:"Generate CODE128 barcodes"},
   ];
   return `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px">
-    <div><div class="section-title">NNIT Office Suite</div><div style="color:#7a8aaa;font-size:13px">13 professional tools powered by AI — Welcome back, ${currentUser?.email === "guest" ? "Guest" : (currentUser?.email?.split("@")[0] || "User")}!</div></div>
+    <div><div class="section-title">NNIT Office Suite</div><div style="color:#7a8aaa;font-size:13px">13 professional tools powered by AI â€” Welcome back, ${currentUser?.email === "guest" ? "Guest" : (currentUser?.email?.split("@")[0] || "User")}!</div></div>
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;text-align:center;min-width:140px">
       <div style="font-size:28px;font-family:'Syne',sans-serif;font-weight:800;color:${plan==="free"?"#3d7fff":"#ffb830"}">${remaining}</div>
       <div style="font-size:11px;color:#7a8aaa;font-family:'DM Mono',monospace">${plan==="free"?"AI uses left today":"UNLIMITED"}</div>
@@ -677,9 +676,9 @@ function renderWord(){return`<div class="section-title">Word Creator</div><div c
   <div class="panel-body"><div id="word-preview" style="background:white;color:#1a1a1a;padding:32px;border-radius:8px;min-height:380px;font-family:Georgia,serif;font-size:14px;line-height:1.8;white-space:pre-wrap"></div></div></div></div>`;}
 
 async function aiWord(){const title=document.getElementById("word-title").value||"Document";const existing=document.getElementById("word-content").value;try{const r=await callAI("You are a professional document writer.","Write a complete professional document titled: "+title+(existing?". Expand on: "+existing:""));document.getElementById("word-content").value=r;updateWordPreview();}catch(e){showToast(e.message);}}
-function updateWordPreview(){const title=document.getElementById("word-title")?.value||"";const author=document.getElementById("word-author")?.value||"";const content=document.getElementById("word-content")?.value||"";const p=document.getElementById("word-preview");if(p)p.innerHTML=`<div style="border-bottom:2px solid #3d7fff;padding-bottom:12px;margin-bottom:16px"><h1 style="font-size:18px;font-family:'Syne',sans-serif;color:#1a1a1a">${title}</h1>${author?`<div style="color:#666;font-size:11px;margin-top:4px">${author} · ${new Date().toLocaleDateString()}</div>`:""}</div><div>${content.replace(/\n/g,"<br>")}</div>`;}
+function updateWordPreview(){const title=document.getElementById("word-title")?.value||"";const author=document.getElementById("word-author")?.value||"";const content=document.getElementById("word-content")?.value||"";const p=document.getElementById("word-preview");if(p)p.innerHTML=`<div style="border-bottom:2px solid #3d7fff;padding-bottom:12px;margin-bottom:16px"><h1 style="font-size:18px;font-family:'Syne',sans-serif;color:#1a1a1a">${title}</h1>${author?`<div style="color:#666;font-size:11px;margin-top:4px">${author} Â· ${new Date().toLocaleDateString()}</div>`:""}</div><div>${content.replace(/\n/g,"<br>")}</div>`;}
 function dlWord(){const title=document.getElementById("word-title").value||"document";const b=new Blob([document.getElementById("word-content").value],{type:"text/plain"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=title.replace(/\s+/g,"-")+".txt";a.click();showToast("Downloaded!");}
-function dlWordHTML(){const title=document.getElementById("word-title").value||"document";const author=document.getElementById("word-author").value||"";const content=document.getElementById("word-content").value;const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:60px auto;padding:0 40px;color:#1a1a1a;line-height:1.8}h1{border-bottom:2px solid #3d7fff;padding-bottom:12px}.meta{color:#666;font-size:12px;margin-bottom:28px}.content{white-space:pre-wrap}</style></head><body><h1>${title}</h1><div class="meta">${author} · ${new Date().toLocaleDateString()}</div><div class="content">${content}</div></body></html>`;const b=new Blob([html],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=title.replace(/\s+/g,"-")+".html";a.click();showToast("HTML downloaded!");}
+function dlWordHTML(){const title=document.getElementById("word-title").value||"document";const author=document.getElementById("word-author").value||"";const content=document.getElementById("word-content").value;const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:60px auto;padding:0 40px;color:#1a1a1a;line-height:1.8}h1{border-bottom:2px solid #3d7fff;padding-bottom:12px}.meta{color:#666;font-size:12px;margin-bottom:28px}.content{white-space:pre-wrap}</style></head><body><h1>${title}</h1><div class="meta">${author} Â· ${new Date().toLocaleDateString()}</div><div class="content">${content}</div></body></html>`;const b=new Blob([html],{type:"text/html"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=title.replace(/\s+/g,"-")+".html";a.click();showToast("HTML downloaded!");}
 
 // ===================== EXCEL =====================
 function renderExcel(){
@@ -757,4 +756,6 @@ if (savedEmail && savedToken) {
 </script>
 </body>
 </html>
+
+
 
