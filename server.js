@@ -274,7 +274,29 @@ app.post("/ocr", async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+// OpenAI-compatible endpoint for web app
+app.post("/ai-compat", async (req, res) => {
+  try {
+    const { model, messages, max_tokens } = req.body;
+    const userMsg = messages.find(m => m.role === "user");
+    const sysMsg = messages.find(m => m.role === "system");
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + process.env.GROQ_API_KEY },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile",
+        max_tokens: max_tokens || 2000,
+        messages: messages
+      })
+    });
+    const data = await response.json();
+    if (!response.ok) return res.status(500).json({ error: data.error });
+    res.json(data);
+  } catch (e) { res.status(500).json({ error: { message: e.message } }); }
+});
+
 // force redeploy
+
 
 
 
