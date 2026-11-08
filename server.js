@@ -216,7 +216,7 @@ async function aiChat(messages, maxTokens, vision) {
       console.error("OpenAI failed, trying Groq:", d.error?.message || r.status);
     } catch (e) { console.error("OpenAI error, trying Groq:", e.message); }
   }
-  const model = vision ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile";
+  const model = vision ? (process.env.GROQ_VISION_MODEL || "qwen/qwen3.8-27b") : (process.env.GROQ_MODEL || "openai/gpt-oss-120b");
   const g = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: {"Content-Type":"application/json","Authorization":"Bearer "+process.env.GROQ_API_KEY},
