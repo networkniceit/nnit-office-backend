@@ -202,17 +202,36 @@ app.post("/seed-large", async (req, res) => {
   } catch(e){res.status(500).json({error:e.message});}
 });
 
+// AI engine: OpenAI first (key on this server), Groq only as backup
+async function aiChat(messages, maxTokens, vision) {
+  if (process.env.OPENAI_API_KEY) {
+    try {
+      const r = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {"Content-Type":"application/json","Authorization":"Bearer "+process.env.OPENAI_API_KEY},
+        body: JSON.stringify({model: process.env.OPENAI_MODEL || "gpt-4o", max_tokens: maxTokens, messages})
+      });
+      const d = await r.json();
+      if (r.ok && d.choices && d.choices[0]) return d.choices[0].message.content;
+      console.error("OpenAI failed, trying Groq:", d.error?.message || r.status);
+    } catch (e) { console.error("OpenAI error, trying Groq:", e.message); }
+  }
+  const model = vision ? "meta-llama/llama-4-scout-17b-16e-instruct" : "llama-3.3-70b-versatile";
+  const g = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+    method: "POST",
+    headers: {"Content-Type":"application/json","Authorization":"Bearer "+process.env.GROQ_API_KEY},
+    body: JSON.stringify({model, max_tokens: maxTokens, messages})
+  });
+  const gd = await g.json();
+  if (!g.ok || !gd.choices || !gd.choices[0]) throw new Error(gd.error?.message || "AI Error");
+  return gd.choices[0].message.content;
+}
+
 app.post("/ai", async (req, res) => {
   try {
     const {prompt, system} = req.body;
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {"Content-Type":"application/json","Authorization":`Bearer ${process.env.GROQ_API_KEY}`},
-      body: JSON.stringify({model:"llama-3.3-70b-versatile", max_tokens:1500, messages:[{role:"system",content:system},{role:"user",content:prompt}]})
-    });
-    const data = await response.json();
-    if(!response.ok) throw new Error(data.error?.message || "AI Error");
-    res.json({result: data.choices[0].message.content});
+    const out = await aiChat([{role:"system",content:system||"You are a helpful assistant."},{role:"user",content:prompt}], 1500, false);
+    res.json({result: out});
   } catch(e) {res.status(500).json({error:e.message});}
 });
 
@@ -225,24 +244,8 @@ app.post("/api/translate", async (req, res) => {
   try {
     const { text, targetLang } = req.body;
     if (!text || !targetLang) return res.status(400).json({ error: "text and targetLang required" });
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + process.env.GROQ_API_KEY
-      },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: "Translate this to " + targetLang + ". Reply with only the translation, nothing else: " + text }]
-      })
-    });
-    const data = await response.json();
-    if (data.choices && data.choices[0]) {
-      res.json({ result: data.choices[0].message.content });
-    } else {
-      res.status(500).json({ error: data.error?.message || "Translation failed" });
-    }
+    const out = await aiChat([{ role: "user", content: "Translate this to " + targetLang + ". Reply with only the translation, nothing else: " + text }], 1000, false);
+    res.json({ result: out });
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
@@ -254,23 +257,11 @@ app.post("/ocr", async (req, res) => {
   try {
     const { base64 } = req.body;
     if (!base64) return res.status(400).json({ error: "base64 required" });
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + process.env.GROQ_API_KEY },
-      body: JSON.stringify({
-        model: "meta-llama/llama-4-scout-17b-16e-instruct",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: [
-          { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64}` } },
-          { type: "text", text: "Extract ALL text from this image exactly as it appears. Return only the extracted text, nothing else." }
-        ]}]
-      })
-    });
-    const text = await response.text();
-    let data;
-    try { data = JSON.parse(text); } catch(e) { return res.status(500).json({ error: "Groq returned invalid response" }); }
-    if (!response.ok) return res.status(500).json({ error: data.error?.message || "OCR failed" });
-    res.json({ result: data.choices[0].message.content });
+    const out = await aiChat([{ role: "user", content: [
+      { type: "image_url", image_url: { url: `data:image/jpeg;base64,${base64}` } },
+      { type: "text", text: "Extract ALL text from this image exactly as it appears. Return only the extracted text, nothing else." }
+    ]}], 1000, true);
+    res.json({ result: out });
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
@@ -289,21 +280,9 @@ app.post("/reset-admin", async (req, res) => {
 // OpenAI-compatible endpoint for web app
 app.post("/ai-compat", async (req, res) => {
   try {
-    const { model, messages, max_tokens } = req.body;
-    const userMsg = messages.find(m => m.role === "user");
-    const sysMsg = messages.find(m => m.role === "system");
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + process.env.GROQ_API_KEY },
-      body: JSON.stringify({
-        model: "llama-3.3-70b-versatile",
-        max_tokens: max_tokens || 2000,
-        messages: messages
-      })
-    });
-    const data = await response.json();
-    if (!response.ok) return res.status(500).json({ error: data.error });
-    res.json(data);
+    const { messages, max_tokens } = req.body;
+    const out = await aiChat(messages, max_tokens || 2000, false);
+    res.json({ choices: [{ index: 0, message: { role: "assistant", content: out }, finish_reason: "stop" }] });
   } catch (e) { res.status(500).json({ error: { message: e.message } }); }
 });
 
