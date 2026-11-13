@@ -1,4 +1,4 @@
-﻿require('dotenv').config();
+require('dotenv').config();
 const {Buffer} = require("buffer");
 const express = require("express");
 const cors = require("cors");
@@ -10,6 +10,20 @@ const app = express();
 app.use(cors());
 app.use(express.json({limit: "50mb"}));
 app.use("/webhook", express.raw({type: "application/json"}));
+
+// Safety: the public AI tools are limited per visitor so nobody can run up the AI bill.
+const aiHits = new Map();
+const aiLimit = (req, res, next) => {
+  const parts = String(req.headers["x-forwarded-for"] || req.ip).split(",");
+  const ip = parts[parts.length - 1].trim();
+  const now = Date.now();
+  const recent = (aiHits.get(ip) || []).filter(x => now - x < 60000);
+  if (recent.length >= 30) return res.status(429).json({ error: "Too many requests, wait a minute" });
+  recent.push(now); aiHits.set(ip, recent);
+  if (aiHits.size > 5000) for (const [k, v] of aiHits) if (!v.some(x => now - x < 60000)) aiHits.delete(k);
+  next();
+};
+app.use(["/ai", "/ai-compat", "/ocr", "/api/translate"], aiLimit);
 
 mongoose.connect(process.env.MONGODB_URI).then(() => console.log("MongoDB connected")).catch(console.error);
 
@@ -281,7 +295,7 @@ app.post("/reset-admin", async (req, res) => {
 app.post("/ai-compat", async (req, res) => {
   try {
     const { messages, max_tokens } = req.body;
-    const out = await aiChat(messages, max_tokens || 2000, false);
+    const out = await aiChat(messages, Math.min(Number(max_tokens) || 2000, 3000), false);
     res.json({ choices: [{ index: 0, message: { role: "assistant", content: out }, finish_reason: "stop" }] });
   } catch (e) { res.status(500).json({ error: { message: e.message } }); }
 });
